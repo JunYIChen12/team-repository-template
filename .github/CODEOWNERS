@@ -1,0 +1,9 @@
+# 本仓库的默认负责人。复制到具体项目后，应改成真实项目负责人或团队。
+* @JunYIChen12
+
+# 保护协作规则本身，避免在无人负责的情况下修改。
+/.github/ @JunYIChen12
+/docs/ @JunYIChen12
+/CONTRIBUTING.md @JunYIChen12
+/SECURITY.md @JunYIChen12
+

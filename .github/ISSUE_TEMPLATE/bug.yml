@@ -1,0 +1,37 @@
+name: 问题反馈
+description: 报告规范、模板、链接或说明中的明确问题
+title: "[问题] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: 感谢反馈。安全问题和凭据泄露请按照 SECURITY.md 私下报告。
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题描述
+      description: 说明在哪里发现了什么问题。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果
+      description: 说明你认为正确内容或行为应该是什么。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 证据或复现方式
+      description: 可附链接、截图、规范冲突或复现步骤。
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交确认
+      options:
+        - label: 我已搜索现有Issue，确认没有重复。
+          required: true
+        - label: 此Issue不包含凭据、客户数据或未披露漏洞。
+          required: true
+

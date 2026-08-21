@@ -1,0 +1,34 @@
+name: 规范改进建议
+description: 建议新增或修改团队协作规则与模板
+title: "[改进] "
+labels: []
+body:
+  - type: textarea
+    id: situation
+    attributes:
+      label: 当前情况
+      description: 现有规则在哪个真实场景中产生了什么问题？
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议方案
+      description: 说明具体要增加、删除或修改什么。
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: 影响范围
+      description: 哪些项目、角色或流程需要调整？是否兼容现有做法？
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: 如何验证有效
+      description: 给出可以判断建议是否解决问题的标准。
+    validations:
+      required: true
+

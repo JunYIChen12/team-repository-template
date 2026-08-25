@@ -30,6 +30,7 @@
 | [仓库管理与协作总规范](docs/REPOSITORY_GOVERNANCE.md) | 团队共同遵循的正式规则 |
 | [项目采用指南](docs/ADOPTION_GUIDE.md) | 新项目如何引用、复制和升级本规范 |
 | [GitHub 设置清单](docs/GITHUB_SETTINGS.md) | 将文档规则转换成平台强制约束 |
+| [IoT 项目专用规范](docs/iot/README.md) | IoT 项目的目录、测试和环境隔离规则 |
 | [安全策略](SECURITY.md) | 漏洞和敏感信息的报告方式 |
 | [更新记录](CHANGELOG.md) | 规范版本与重要变化 |
 

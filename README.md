@@ -29,6 +29,7 @@
 | [贡献指南](CONTRIBUTING.md) | 日常创建 Issue、分支、提交和 PR 的操作说明 |
 | [仓库管理与协作总规范](docs/REPOSITORY_GOVERNANCE.md) | 团队共同遵循的正式规则 |
 | [项目采用指南](docs/ADOPTION_GUIDE.md) | 新项目如何引用、复制和升级本规范 |
+| [单设备从零配置到数据验收规范](docs/iot-standards/单设备从零配置到数据验收规范.md) | IoT 单台设备从点表、接入到 UI 与历史验收的可复用流程 |
 | [GitHub 设置清单](docs/GITHUB_SETTINGS.md) | 将文档规则转换成平台强制约束 |
 | [安全策略](SECURITY.md) | 漏洞和敏感信息的报告方式 |
 | [更新记录](CHANGELOG.md) | 规范版本与重要变化 |

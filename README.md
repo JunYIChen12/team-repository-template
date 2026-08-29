@@ -2,7 +2,7 @@
 
 本仓库是团队仓库管理与协作规范的唯一权威来源（Single Source of Truth）。它不存放具体项目的业务代码，主要用于统一新项目的协作方式，并为项目仓库提供可复制的 GitHub 模板。
 
-当前规范版本：`v1.0.0`
+当前规范版本：`v1.2.0`
 
 ## 第一次加入团队
 
@@ -32,6 +32,8 @@
 | [单设备从零配置到数据验收规范](docs/iot-standards/单设备从零配置到数据验收规范.md) | IoT 单台设备从点表、接入到 UI 与历史验收的可复用流程 |
 | [GitHub 设置清单](docs/GITHUB_SETTINGS.md) | 将文档规则转换成平台强制约束 |
 | [IoT 项目专用规范](docs/iot/README.md) | IoT 项目的目录、测试和环境隔离规则 |
+| [Docker / WSL2 空间治理规范](docs/DOCKER_GOVERNANCE.md) | Docker Desktop、WSL2、VHDX 和项目运行资源治理 |
+| [开发前置门禁、测试与验收规范](docs/DEVELOPMENT_READINESS.md) | 开发前置条件、测试、隔离和验收证据 |
 | [安全策略](SECURITY.md) | 漏洞和敏感信息的报告方式 |
 | [更新记录](CHANGELOG.md) | 规范版本与重要变化 |
 

@@ -11,6 +11,7 @@
 1. 阅读[新人接入指南](docs/ONBOARDING.md)，完成第一次协作演练。
 2. 阅读[贡献指南](CONTRIBUTING.md)，了解日常提交步骤。
 3. 遇到争议或特殊情况时，查询[仓库管理与协作总规范](docs/REPOSITORY_GOVERNANCE.md)。
+4. 开始功能开发前，完成[开发前置门禁、测试与验收规范](docs/DEVELOPMENT_READINESS.md)。
 
 ## 最重要的六条规则
 

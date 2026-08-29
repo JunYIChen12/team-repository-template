@@ -17,3 +17,12 @@
 - 建立 Issue、PR、CODEOWNERS、安全与行为准则模板。
 - 定义中心引用与受控同步机制。
 
+## [1.1.0] - 2026-08-29
+
+### 新增
+
+- 增加《软件开发前置门禁、测试与验收规范》。
+- 增加 Definition of Ready、Definition of Done、隔离环境、安全和测试证据要求。
+- 增加 OpenAPI、MQTT、Compose、SLSA、ISO/IEC/IEEE 12207、29119、25010 和 NIST SSDF 的规范性参考。
+- 在 README 和项目采用指南中增加开发前置规范入口及采用清单。
+

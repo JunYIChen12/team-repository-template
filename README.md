@@ -2,7 +2,7 @@
 
 本仓库是团队仓库管理与协作规范的唯一权威来源（Single Source of Truth）。它不存放具体项目的业务代码，主要用于统一新项目的协作方式，并为项目仓库提供可复制的 GitHub 模板。
 
-当前规范版本：`v1.0.0`
+当前规范版本：`v1.1.0`
 
 ## 第一次加入团队
 
@@ -11,6 +11,7 @@
 1. 阅读[新人接入指南](docs/ONBOARDING.md)，完成第一次协作演练。
 2. 阅读[贡献指南](CONTRIBUTING.md)，了解日常提交步骤。
 3. 遇到争议或特殊情况时，查询[仓库管理与协作总规范](docs/REPOSITORY_GOVERNANCE.md)。
+4. 开始功能开发前，完成[开发前置门禁、测试与验收规范](docs/DEVELOPMENT_READINESS.md)。
 
 ## 最重要的六条规则
 
@@ -28,6 +29,7 @@
 | [新人接入指南](docs/ONBOARDING.md) | 帮助新成员在 15～30 分钟内完成首次协作 |
 | [贡献指南](CONTRIBUTING.md) | 日常创建 Issue、分支、提交和 PR 的操作说明 |
 | [仓库管理与协作总规范](docs/REPOSITORY_GOVERNANCE.md) | 团队共同遵循的正式规则 |
+| [开发前置门禁、测试与验收规范](docs/DEVELOPMENT_READINESS.md) | 开发前置条件、测试、隔离和验收证据 |
 | [项目采用指南](docs/ADOPTION_GUIDE.md) | 新项目如何引用、复制和升级本规范 |
 | [GitHub 设置清单](docs/GITHUB_SETTINGS.md) | 将文档规则转换成平台强制约束 |
 | [安全策略](SECURITY.md) | 漏洞和敏感信息的报告方式 |

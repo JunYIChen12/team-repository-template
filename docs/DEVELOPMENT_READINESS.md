@@ -1,6 +1,6 @@
 # 软件开发前置门禁、测试与验收规范
 
-版本：`v1.1.0`
+版本：`v1.2.0`
 
 ## 1. 目的与适用范围
 
@@ -14,8 +14,11 @@
 
 - [ISO/IEC/IEEE 12207](https://www.iso.org/standard/90219.html)：软件生命周期过程。
 - [ISO/IEC/IEEE 29119](https://committee.iso.org/sites/jtc1sc7/home/projects/flagship-standards/isoiecieee-29119-series.html)：软件测试过程和测试文档。
+- [ISO/IEC/IEEE 29119-2:2021](https://www.iso.org/standard/79428.html)：测试过程，覆盖测试计划、分析、设计、执行和完成。
+- [ISO/IEC/IEEE 29119-3](https://committee.iso.org/standard/56737.html?browse=ics)：测试文档和测试记录示例。
+- [IEEE 1012-2024](https://standards.ieee.org/ieee/1012/12536/)：验证与确认过程，检查产品是否满足要求和用户预期。
 - [ISO/IEC 25010](https://www.iso.org/standard/78176.html)：软件产品质量模型。
-- [NIST SP 800-218 SSDF](https://www.nist.gov/publications/secure-software-development-framework-ssdf-version-11-recommendations-mitigating-risk)：安全软件开发实践。
+- [NIST SP 800-218 SSDF](https://csrc.nist.gov/pubs/sp/800/218/final)：安全软件开发实践。
 - [OpenAPI Specification](https://spec.openapis.org/oas/)：HTTP API 契约。
 - [OASIS MQTT Version 5.0](https://www.oasis-open.org/standard/mqtt-v5-0-os/)：消息通信契约。
 - [Compose Specification](https://github.com/compose-spec/compose-spec)：容器服务、网络、卷和健康检查定义。
@@ -90,6 +93,43 @@
 
 测试失败时必须先保存失败命令、版本、输入分类、实际结果和失败层级，再决定修复代码、修复测试、修复数据或标记环境阻塞。不得只修改断言使测试通过。
 
+### 5.1 重测判定：先问“什么变了”
+
+测试结果不是一句“现在能不能用”，而是对下面这组条件的记录：`Issue + 契约版本 + 完整 commit + 测试命令 + 输入/fixture + 运行环境和依赖`。这组条件全部没有变化时，原证据仍然是同一次测试；只为得到一个新时间戳而重跑，不能增加可信度。
+
+| 发生了什么 | 应做什么 | 结果如何记录 |
+| --- | --- | --- |
+| 完整 commit、命令、输入、环境和依赖都没变 | 不重复执行，复用原回执 | 标记“条件未变，沿用证据”，并保留原证据位置 |
+| 产品代码或配置改变 | 先跑改动直接影响的聚焦测试，再跑受影响模块回归 | 新回执同时写旧基线、新 commit 和变化范围 |
+| 测试脚本、断言或 fixture 改变 | 重新确认测试本身有效，再做独立验证 | 不能把新测试通过说成旧产品已经修好 |
+| 数据库、Broker、依赖或权限环境修复 | 只重跑之前被环境挡住的层 | 原结论保持 `BLOCKED`，新结论另记，不能改写历史 |
+| API、数据库、MQTT 或外部设备契约改变 | 先评审影响并生成新契约版本，再重新设计测试 | 旧证据只证明旧契约，不证明新契约 |
+| 测试基线或候选 commit 改变 | 将旧结果保留为历史结果，按新基线重新验证 | 必须同时记录旧 SHA、新 SHA 和更换原因 |
+
+连续两次失败但没有新的代码、数据、环境或契约证据时，暂停重跑，先做失败归因。`BLOCKED` 表示前置条件没有准备好，不等于产品 `FAIL`；健康检查通过也不等于业务验收通过。
+
+### 5.2 需求到证据的最小追踪链
+
+每个 Issue 或测试任务都必须能沿着下面的链条走完：
+
+```text
+Issue → 契约版本 → 设计/实现 commit → 测试编号与命令 → 环境/输入 → 实际结果 → 证据 → 验收人
+```
+
+回执至少保留以下字段：
+
+| 字段 | 要回答的问题 |
+| --- | --- |
+| Issue | 要解决哪个问题，范围和非目标是什么？ |
+| 契约版本 | API、数据库、MQTT 或外部设备的规则是哪一版？ |
+| 完整 commit | 测的到底是哪一份代码？ |
+| 测试编号与命令 | 谁可以用什么步骤复现？ |
+| 环境与输入 | 用了哪个隔离环境、依赖、数据库和测试数据？ |
+| 实际结果与归因 | 看到了什么，属于代码、测试、数据还是环境问题？ |
+| 证据与验收 | 证据在哪里，谁确认了业务结果？ |
+
+链条中有一项缺失时，任务只能保持 `PARTIAL`、`BLOCKED` 或 `NOT_VERIFIED`，不能写成“已完成”。
+
 ## 6. 隔离与安全门禁
 
 任务级验证必须遵守以下要求：
@@ -140,6 +180,8 @@
 需求范围：
 非目标：
 当前基线：
+追踪关系：Issue → 契约版本 → 完整 commit → 测试编号 → 证据 → 验收人
+重测原因：无变化复用 / 代码变化 / 测试或数据变化 / 环境修复 / 契约变化 / 基线变化
 接口与数据契约：
 测试数据及预期结果：
 工具与运行环境：

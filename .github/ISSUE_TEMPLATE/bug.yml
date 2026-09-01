@@ -7,6 +7,13 @@ body:
     attributes:
       value: 感谢反馈。安全问题和凭据泄露请按照 SECURITY.md 私下报告。
   - type: textarea
+    id: scenario
+    attributes:
+      label: 真实用户场景
+      description: 谁在什么情况下，正在完成什么业务动作？
+    validations:
+      required: true
+  - type: textarea
     id: problem
     attributes:
       label: 问题描述
@@ -14,17 +21,31 @@ body:
     validations:
       required: true
   - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现方式
+      description: 写出前置条件、输入、操作步骤和实际结果；不要只写“偶发”或“不可用”。
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: 业务影响
+      description: 这个问题让用户无法完成什么，或带来了什么数据和安全风险？
+    validations:
+      required: true
+  - type: textarea
     id: expected
     attributes:
       label: 期望结果
-      description: 说明你认为正确内容或行为应该是什么。
+      description: 说明用户、接口、消息、历史记录或运维人员应该看到的可观察结果。
     validations:
       required: true
   - type: textarea
     id: evidence
     attributes:
-      label: 证据或复现方式
-      description: 可附链接、截图、规范冲突或复现步骤。
+      label: 证据
+      description: 可附链接、截图、日志摘要或规范冲突；不要放入密码、Token、证书或客户敏感数据。
   - type: checkboxes
     id: checks
     attributes:

@@ -8,6 +8,8 @@
 
 本规范不替代数据库备份、业务数据保留策略、Docker Desktop 官方维护流程或项目自己的发布审批。
 
+候选测试环境的版本、缓存、Compose、Secret、迁移、UI 和回滚顺序以 [`docs/iot/候选环境交付契约.md`](iot/候选环境交付契约.md) 为唯一入口；本文仅保留 Windows Docker/WSL2 的通用空间治理。
+
 ## 2. 两层存储模型
 
 Docker 使用的空间必须区分为两层：

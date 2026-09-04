@@ -20,7 +20,7 @@
 ```markdown
 ## 团队协作
 
-本项目遵循 [团队仓库协作规范 v1](https://github.com/JunYIChen12/team-repository-template/blob/main/docs/REPOSITORY_GOVERNANCE.md)。
+本项目遵循 [团队仓库协作规范 v3.0.0](https://github.com/JunYIChen12/team-repository-template/blob/main/docs/REPOSITORY_GOVERNANCE.md)。
 
 新成员请先完成[新人接入指南](https://github.com/JunYIChen12/team-repository-template/blob/main/docs/ONBOARDING.md)，日常提交遵循本项目的 `CONTRIBUTING.md`。
 ```
@@ -30,6 +30,7 @@
 ## 三、新项目接入清单
 
 - [ ] 在 README 中声明规范版本并添加中心链接。
+- [ ] 在开发任务开始前阅读[目标驱动的开发、运行与验收规范](DEVELOPMENT_READINESS.md)，并在 Issue 中记录目标、最小主线和验收条件。
 - [ ] 复制并按项目调整 `CONTRIBUTING.md`。
 - [ ] 复制 `.github/` 下的 PR、Issue 和 CODEOWNERS 模板。
 - [ ] 把 CODEOWNERS 中的示例负责人改成项目真实负责人。
@@ -47,3 +48,24 @@
 4. 不兼容变化发布新的主版本，项目明确决定是否和何时升级。
 5. 项目内模板通过 PR 同步，禁止静默覆盖。
 
+## 五、目标驱动规范的采用方式
+
+项目应在开发流程中引用 [目标驱动的开发、运行与验收规范](DEVELOPMENT_READINESS.md)，并在每个功能 Issue 中保留目标、非目标、主线、验收条件和必要的资源边界。规范正文建议通过中心链接引用；如果项目需要离线使用或需要项目特有条款，可以通过独立 PR 复制并扩展，但不得降低隔离、安全或真实验收要求。
+
+## 六、IoT 项目采用
+
+IoT 项目在项目 README 中增加 [IoT 项目专用规范](iot/README.md) 链接，并声明采用的规范包版本。
+
+IoT 专区负责目录与资源、测试体系、环境隔离、设备验收和接入契约；Issue、PR、commit、分支和合并继续使用本仓库已有的团队通用规则。
+
+每次 IoT 测试或验收必须记录本规范仓库的完整 Git SHA。规范更新后，由项目负责人通过 PR 评估影响，再决定是否同步到项目内规则入口。
+
+## 七、按技术栈补充检查
+
+项目应根据技术栈补充以下检查：
+
+- API 项目：OpenAPI 契约校验和请求/响应测试。
+- MQTT 项目：Topic、QoS、权限、幂等和重试测试。
+- 数据库项目：任务级数据库、迁移、回滚和可重置 fixture。
+- 容器项目：Compose schema、健康检查、就绪检查和资源清理。
+- 发布项目：构建来源、制品摘要、部署前检查和回滚证据。

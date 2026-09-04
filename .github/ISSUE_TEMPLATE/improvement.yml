@@ -6,15 +6,29 @@ body:
   - type: textarea
     id: situation
     attributes:
-      label: 当前情况
-      description: 现有规则在哪个真实场景中产生了什么问题？
+      label: 真实用户场景
+      description: 谁在什么情况下，正在完成什么业务动作？
     validations:
       required: true
   - type: textarea
-    id: proposal
+    id: problem
     attributes:
-      label: 建议方案
-      description: 说明具体要增加、删除或修改什么。
+      label: 实际遇到的问题
+      description: 说明用户看到了什么问题、造成了什么影响以及如何复现。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果
+      description: 说明验收时应该看到的可观察结果，不要预设唯一技术实现。
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: 范围和非目标
+      description: 说明这次要解决什么，以及明确不处理什么。
     validations:
       required: true
   - type: textarea
@@ -24,6 +38,11 @@ body:
       description: 哪些项目、角色或流程需要调整？是否兼容现有做法？
     validations:
       required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 讨论中的方案（可选）
+      description: 如果已有想法可以记录，但它不是 Issue 的前置条件，最终实现方案放在契约、设计记录或 PR 中。
   - type: textarea
     id: verification
     attributes:

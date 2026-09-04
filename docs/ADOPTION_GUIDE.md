@@ -20,7 +20,7 @@
 ```markdown
 ## 团队协作
 
-本项目遵循 [团队仓库协作规范 v3.0.0](https://github.com/JunYIChen12/team-repository-template/blob/main/docs/REPOSITORY_GOVERNANCE.md)。
+本项目遵循 [团队仓库协作规范 v3.0.1](https://github.com/JunYIChen12/team-repository-template/blob/main/docs/REPOSITORY_GOVERNANCE.md)。
 
 新成员请先完成[新人接入指南](https://github.com/JunYIChen12/team-repository-template/blob/main/docs/ONBOARDING.md)，日常提交遵循本项目的 `CONTRIBUTING.md`。
 ```

@@ -14,7 +14,7 @@
 
 Docker 使用的空间必须区分为两层：
 
-\`\`\`text
+```text
 Windows / D 盘
 ├─ Docker Desktop WSL2 VHDX
 │  ├─ 镜像层
@@ -28,11 +28,11 @@ Windows / D 盘
    ├─ Node-RED /data、flow 和模块
    ├─ 备份、证据和运行配置
    └─ 其他业务持久化数据
-\`\`\`
+```
 
 清理 VHDX 内部对象不会保证 Windows 看到的 VHDX 文件立即变小；VHDX 压缩必须在 Docker Desktop 和所有 WSL 发行版完全退出后，在维护窗口执行。
 
-项目必须在 \`environment.manifest\` 中登记：
+项目必须在 `environment.manifest` 中登记：
 
 - VHDX 绝对路径；
 - 绑定目录、Volume 和 owner；
@@ -48,7 +48,7 @@ Windows / D 盘
 | Deletable | 逐项核验后才允许删除 | 当前任务创建且已停止、无挂载、无回滚价值的临时资源 |
 | Unknown | 不删除，登记并上报 | 无标签镜像、无 owner Volume、用途不明的 VHDX 内容 |
 
-任何清理前必须核对容器引用、挂载、进程使用、业务 owner 和恢复路径。禁止按文件年龄、\`RECLAIMABLE\` 字段或名称猜测可删除性。
+任何清理前必须核对容器引用、挂载、进程使用、业务 owner 和恢复路径。禁止按文件年龄、`RECLAIMABLE` 字段或名称猜测可删除性。
 
 ## 4. 推荐阈值
 
@@ -56,41 +56,41 @@ Windows / D 盘
 
 | 状态 | VHDX 文件 | 动作 |
 | --- | ---: | --- |
-| 正常 | \`< 12 GiB\` | 正常运行，按计划执行安全维护 |
-| 警告 | \`>= 12 GiB\` | 停止非必要构建/拉取，执行 dry-run 和定向缓存清理 |
-| 临界 | \`>= 18 GiB\` | 禁止新增镜像和构建，安排维护窗口，检查绑定数据增长 |
-| 硬门禁 | \`>= 20 GiB\` | 固定启动入口 fail-closed；不得继续启动或扩容，等待人工维护 |
+| 正常 | `< 12 GiB` | 正常运行，按计划执行安全维护 |
+| 警告 | `>= 12 GiB` | 停止非必要构建/拉取，执行 dry-run 和定向缓存清理 |
+| 临界 | `>= 18 GiB` | 禁止新增镜像和构建，安排维护窗口，检查绑定数据增长 |
+| 硬门禁 | `>= 20 GiB` | 固定启动入口 fail-closed；不得继续启动或扩容，等待人工维护 |
 
 D 盘总空间另设项目阈值：剩余小于 80 GiB 警告，小于 40 GiB 停止高风险操作。VHDX 阈值不等于 D 盘总空间阈值。
 
-Docker Desktop 的 WSL2 页面可能没有可设置的磁盘上限控件。此时 20 GiB 是项目门禁，不应伪称为 Docker 引擎的硬配额；固定入口和维护脚本必须阻止本项目继续启动，但不能拦截用户手工执行的所有 \`docker pull\` 或 \`docker build\`。
+Docker Desktop 的 WSL2 页面可能没有可设置的磁盘上限控件。此时 20 GiB 是项目门禁，不应伪称为 Docker 引擎的硬配额；固定入口和维护脚本必须阻止本项目继续启动，但不能拦截用户手工执行的所有 `docker pull` 或 `docker build`。
 
 ## 5. 日常自动维护
 
-每个环境只允许一个带 owner 的定时任务，建议每天一次，时间写入 manifest。任务必须支持 \`--dry-run\` 和 \`--apply\`，默认不得破坏数据。
+每个环境只允许一个带 owner 的定时任务，建议每天一次，时间写入 manifest。任务必须支持 `--dry-run` 和 `--apply`，默认不得破坏数据。
 
 允许的默认动作：
 
-\`\`\`text
+```text
 docker buildx prune --filter until=24h --force
 docker image prune --filter dangling=true --force
-\`\`\`
+```
 
-必须先记录 VHDX、D 盘、\`docker system df\`、容器状态和 Build Cache，再执行清理；执行后回读释放量和服务状态。
+必须先记录 VHDX、D 盘、`docker system df`、容器状态和 Build Cache，再执行清理；执行后回读释放量和服务状态。
 
 默认禁止：
 
-- \`docker system prune\`；
-- \`docker system prune --volumes\`；
-- \`docker volume prune\`、\`docker container prune\`；
+- `docker system prune`；
+- `docker system prune --volumes`；
+- `docker volume prune`、`docker container prune`；
 - 删除当前 main 镜像、Volume、网络或数据库；
 - 运行态 VHDX 压缩；
-- 关闭外键、\`TRUNCATE\`、\`CASCADE\` 或猜测 SQL 清理业务数据；
+- 关闭外键、`TRUNCATE`、`CASCADE` 或猜测 SQL 清理业务数据；
 - 以清理 Docker 空间为名删除 Node-RED flow、credentials、settings 或 modules。
 
 ## 6. 日志和业务数据治理
 
-Compose 服务应使用有限轮转日志，例如 \`json-file\` 的 \`max-size=10m\`、\`max-file=3\`。日志轮转限制 Docker 内部日志，不代表绑定目录中的 EMQX、Ingester 或数据库日志会自动受限。
+Compose 服务应使用有限轮转日志，例如 `json-file` 的 `max-size=10m`、`max-file=3`。日志轮转限制 Docker 内部日志，不代表绑定目录中的 EMQX、Ingester 或数据库日志会自动受限。
 
 历史业务数据必须由独立的 retention 方案管理：
 
@@ -98,7 +98,7 @@ Compose 服务应使用有限轮转日志，例如 \`json-file\` 的 \`max-size=
 2. 确认无开放窗口、未完成 job 和 pending outbox；
 3. 备份并验证可恢复；
 4. 使用应用层状态转换和精确外键顺序，分批短事务删除；
-5. 回读删除、跳过、近 24 小时保留、表大小、WAL、\`pgsql_tmp\` 和业务结果。
+5. 回读删除、跳过、近 24 小时保留、表大小、WAL、`pgsql_tmp` 和业务结果。
 
 业务数据清理不会自动缩小 VHDX，也不能替代 Docker 缓存清理。保留策略是否启用必须由业务负责人单独批准。
 
@@ -123,7 +123,7 @@ VHDX 达到硬门禁时，启动入口必须返回明确错误并写入脱敏回
 1. 记录版本、容器、挂载、Volume、端口、VHDX、C/D 空间和数据库恢复路径；
 2. 停止 Node-RED、应用写入者、EMQX、PostgreSQL；
 3. 完全退出 Docker Desktop；
-4. 执行 \`wsl --shutdown\`，确认无发行版和进程占用 VHDX；
+4. 执行 `wsl --shutdown`，确认无发行版和进程占用 VHDX；
 5. 仅对 manifest 登记的绝对路径执行官方 compact；
 6. 失败时保留原始错误，不删除或重建 VHDX；
 7. 启动 Docker Desktop，使用固定入口恢复服务；
@@ -137,7 +137,7 @@ Docker Desktop 的 Clean/Purge 属于更高风险的重建动作，只能在确�
 
 - 环境、Git、Compose、镜像 digest；
 - VHDX 前后大小和阈值状态；
-- \`docker system df\` 前后摘要；
+- `docker system df` 前后摘要；
 - 清理对象、跳过对象和原因；
 - 容器、网络、Volume、端口和健康状态；
 - C/D 空间、OOM、重启次数、数据库迁移状态；
@@ -149,7 +149,7 @@ Docker Desktop 的 Clean/Purge 属于更高风险的重建动作，只能在确�
 
 项目运行时应提供以下能力，具体路径和阈值由 manifest 绑定：
 
-- \`Docker_空间维护.ps1\`：每日安全清理、VHDX 观察和硬门禁回执；
+- `Docker_空间维护.ps1`：每日安全清理、VHDX 观察和硬门禁回执；
 - 固定启动入口：启动前检查 VHDX 硬门禁，达到 20 GiB 时 fail-closed；
 - Compose：服务日志轮转，当前 main 镜像和数据目录不自动删除；
 - 证据目录：保存治理回执和 SHA-256；

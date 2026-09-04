@@ -6,7 +6,7 @@
 
 1. 搜索现有 Issue，确认问题没有重复。
 2. 对非简单文字修正，先创建 Issue，写清现状、目标和验收标准。
-3. 阅读[开发前置门禁、测试与验收规范](docs/DEVELOPMENT_READINESS.md)，在 Issue 中完成开发准备回执；未满足前置门禁时保持 `NOT_READY` 或 `BLOCKED`。
+3. 阅读[目标驱动的开发、运行与验收规范](docs/DEVELOPMENT_READINESS.md)，在 Issue 中明确目标、最小主线和验收条件；未满足条件时保持 `NOT_READY` 或 `BLOCKED`。
 4. 从最新 `main` 创建短期分支。
 5. 完成单一目的的修改并自行检查。
 6. 创建 PR，填写模板并关联 Issue。

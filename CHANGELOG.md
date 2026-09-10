@@ -2,6 +2,15 @@
 
 本文件记录会影响团队协作方式的重要变化。
 
+
+## [Unreleased]
+
+### 新增
+
+- 新增根 `AGENTS.md`，作为 Codex 线程和自动化代理的共同规则入口。
+- 新增 `docs/docker/DOCKER_GOVERNANCE.md`，治理 Ubuntu / Ubuntu VM 上的 Docker Engine、Compose、镜像、网络、数据、发布、回滚与恢复。
+- 保留现有 `docs/DOCKER_GOVERNANCE.md`，继续专门治理 Windows Docker Desktop、WSL2、VHDX 与空间维护。
+
 版本采用 `主版本.次版本.修订版本`：
 
 - 主版本：存在不兼容的流程或责任变化，需要项目主动升级。
